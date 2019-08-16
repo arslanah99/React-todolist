@@ -23,7 +23,7 @@ handleSubmit = (event) => {
 
   render(){
     let renderTodos = this.state.storedTodos.map((todo) => {
-      return <li>{todo}</li>
+      return <li>{todo}<button>Delete</button></li>
     })
   return (
     <div className="App">
