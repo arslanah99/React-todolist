@@ -28,7 +28,7 @@ handleSubmit = (event) => {
   return (
     <div className="App">
       <form onSubmit={this.handleSubmit}>
-        <input type="text" onChange={this.handleChange}></input>
+        <input type="text" onChange={this.handleChange}></input> 
         <input type="submit" value="Submit"></input>
       </form>
       <ul>{renderTodos}</ul>
