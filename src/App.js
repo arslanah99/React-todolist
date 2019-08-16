@@ -17,13 +17,22 @@ handleSubmit = (event) => {
   storedTodos = storedTodos.push(singleTodo)
   event.preventDefault()
   this.setState({
-    singleTodo: ""
+    singleTodo: this.state.singleTodo
   })
 }
 
+removeTodo = (event) => {
+  this.setState({
+    storedTodos: this.state.storedTodos.filter(el => el !== event)
+  })
+}
+
+
+
+
   render(){
-    let renderTodos = this.state.storedTodos.map((todo) => {
-      return <li>{todo}<button>Delete</button></li>
+    let renderTodos = this.state.storedTodos.map((todo, index) => {
+      return <li key={index}>{todo}<button onClick={() => {this.removeTodo(todo)}}>Delete</button></li>
     })
   return (
     <div className="App">
@@ -31,7 +40,7 @@ handleSubmit = (event) => {
         <input type="text" onChange={this.handleChange}></input> 
         <input type="submit" value="Submit"></input>
       </form>
-      <ul>{renderTodos}</ul>
+      <ol>{renderTodos}</ol>
     </div>
   );
 }
