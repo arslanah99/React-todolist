@@ -4,7 +4,7 @@ import './App.css';
 class App extends Component {
   constructor(props){
     super(props)
-    this.state = {singleTodo: "", storedTodos: []}
+    this.state = {singleTodo: "", storedTodos: [], clearField: ""}
   }
   
 handleChange = (event) => {
@@ -19,15 +19,20 @@ handleSubmit = (event) => {
   this.setState({
     singleTodo: this.state.singleTodo
   })
+  this.input.value = ''
 }
 
 removeTodo = (event) => {
   this.setState({
-    storedTodos: this.state.storedTodos.filter(el => el !== event)
+    storedTodos: this.state.storedTodos.filter(todo => todo !== event)
   })
 }
 
-
+resetField = () => {
+  this.setState({
+    field: this.state.clearField
+  })
+}
 
 
   render(){
@@ -37,7 +42,7 @@ removeTodo = (event) => {
   return (
     <div className="App">
       <form onSubmit={this.handleSubmit}>
-        <input type="text" onChange={this.handleChange}></input> 
+        <input type="text" onChange={this.handleChange} ref={(input) => this.input = input}></input> 
         <input type="submit" value="Submit"></input>
       </form>
       <ol>{renderTodos}</ol>
