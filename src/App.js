@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
+class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {singleTodo: "", storedTodos: []}
+  }
+  
+handleChange = (event) => {
+  this.setState({singleTodo: event.target.value})
+}
+
+handleSubmit = (event) => {
+  let storedTodos = this.state.storedTodos
+  let singleTodo = this.state.singleTodo
+  storedTodos = storedTodos.push(singleTodo)
+  event.preventDefault()
+  this.setState({
+    singleTodo: ""
+  })
+}
+
+  render(){
+    let renderTodos = this.state.storedTodos.map((todo) => {
+      return <li>{todo}</li>
+    })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" onChange={this.handleChange}></input>
+        <input type="submit" value="Submit"></input>
+      </form>
+      <ul>{renderTodos}</ul>
     </div>
   );
+}
 }
 
 export default App;
